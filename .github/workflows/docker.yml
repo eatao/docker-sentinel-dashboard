@@ -1,15 +1,21 @@
 name: Publish sentinel-bashboard To Dockerhub
 
 on:
+  # 推送事件
   push:
     branches:
       - main
     tags:
-      - 'v*'
-
+      # 触发v开头的TAG 'v*' 'v*.*.*'
+      - '*'
+  # 合并请求事件
+  pull_request:
+    branches:
+      - 'main'
+      
 jobs:
-  publish_docker_image:
-    name: Publish
+  push_docker_image:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,4 +34,26 @@ jobs:
           release_name: ${{ github.ref }}
           draft: false
           prerelease: false
-      
+          
+      - name: Login to Aliyun Registry
+        uses: docker/login-action@v2
+        with:
+          registry: registry.cn-hangzhou.aliyuncs.com
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
+          
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: jiangore/sentinel-dashboard
+          tags: |
+            type=match,pattern=\d.\d.\d
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
