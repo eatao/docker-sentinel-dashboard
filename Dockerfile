@@ -1,5 +1,5 @@
-FROM java:8
-MAINTAINER jiangore "1066985081@qq.com"
+FROM openjdk:8-jdk-alpine
+MAINTAINER jiangore <1066985081@qq.com>
 
 # set environment
 ENV BASE_DIR="/opt/sentinel" \
