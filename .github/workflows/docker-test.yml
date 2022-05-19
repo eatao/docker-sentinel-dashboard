@@ -39,7 +39,6 @@ jobs:
         run: |
           echo "RepositoryName:      ${{ github.event.repository.name }}"
           echo "Ref:      ${{ github.ref }}"
-          echo "Ref:      ${{ GITHUB_REPOSITORY }}"
           echo "Ref:      ${{ ALIYUN_REGISTRY }}"
       
       - name: Get Metadata (Tags、Labels)
