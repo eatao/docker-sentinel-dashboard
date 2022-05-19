@@ -6,6 +6,12 @@ on:
     branches:
       - test
 
+
+env:
+  ALIYUN_REGISTRY: registry.cn-hangzhou.aliyuncs.com
+  DOCKERHUB_REGISTRY: docker.io
+  
+  
 jobs:
   docker-image-workflow:
     runs-on: ubuntu-latest
@@ -28,18 +34,21 @@ jobs:
           echo "Flags:     ${{ steps.buildx.outputs.flags }}"
           echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
       
-      - name: Print Github Constants
+      # see: https://docs.github.com/en/actions/learn-github-actions/environment-variables
+      - name: Print Github Environment Variables
         run: |
           echo "RepositoryName:      ${{ github.event.repository.name }}"
           echo "Ref:      ${{ github.ref }}"
+          echo "Ref:      ${{ GITHUB_REPOSITORY }}"
+          echo "Ref:      ${{ ALIYUN_REGISTRY }}"
       
       - name: Get Metadata (Tags、Labels)
         id: metadata
         uses: docker/metadata-action@v4
         with:
           images: |
-            registry.cn-hangzhou.aliyuncs.com/jiangore/sentinel-dashboard
-            docker.io/jiangore/sentinel-dashboard
+            ${{ ALIYUN_REGISTRY }}/jiangore/sentinel-dashboard
+            ${{ DOCKERHUB_REGISTRY }}/jiangore/sentinel-dashboard
           # type的9种类型
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
