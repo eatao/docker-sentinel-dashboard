@@ -7,7 +7,7 @@ on:
       - main
     tags:
       # 触发v开头的TAG 'v*' 'v*.*.*'
-      - '*'
+      - 'v*'
   # 合并请求事件
   pull_request:
     branches:

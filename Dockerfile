@@ -6,6 +6,7 @@ ENV BASE_DIR="/opt/sentinel" \
     SERVER_PORT="8080" \
 	USERNAME="sentinel" \
 	PASSWORD="sentinel" \
+	LOG_DIR="/opt/sentinel/logs/csp/" \
     DASHBOARD_SERVER="localhost:8080" \
     PROJECT_NAME="sentinel-dashboard" \
     JAVA_OPTS="" \
@@ -24,7 +25,7 @@ RUN set -x \
     && wget https://github.com/alibaba/Sentinel/releases/download/${SENTINEL_DASHBOARD_VERSION}/sentinel-dashboard-${SENTINEL_DASHBOARD_VERSION}.jar -P $BASE_DIR -O sentinel-dashboard.jar \
     && ln -snf /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo '$TIME_ZONE' > /etc/timezone
 	
-ADD bin/docker-entrypoint.sh /root/docker-entrypoint.sh
+ADD docker-entrypoint.sh /root/docker-entrypoint.sh
 
 RUN chmod 777 /root/docker-entrypoint.sh
 
