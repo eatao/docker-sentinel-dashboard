@@ -47,8 +47,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ ALIYUN_REGISTRY }}/jiangore/sentinel-dashboard
-            ${{ DOCKERHUB_REGISTRY }}/jiangore/sentinel-dashboard
+            ${{ env.ALIYUN_REGISTRY }}/jiangore/sentinel-dashboard
+            ${{ env.DOCKERHUB_REGISTRY }}/jiangore/sentinel-dashboard
           # type的9种类型
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
