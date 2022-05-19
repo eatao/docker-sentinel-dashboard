@@ -55,5 +55,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: registry.cn-hangzhou.aliyuncs.com/jiangore/sentinel-dashboard:${{ steps.meta.outputs.tags }}
+          tags: registry.cn-hangzhou.aliyuncs.com/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
