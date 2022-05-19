@@ -7,7 +7,7 @@ on:
       - test
 
 jobs:
-  buildx:
+  docker-image-workflow:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -55,6 +55,6 @@ jobs:
             type=raw,value=main
             type=sha
           labels: |
-            org.opencontainers.image.title=sentinel-dashboard
+            org.opencontainers.image.author=jiangore
             
       
