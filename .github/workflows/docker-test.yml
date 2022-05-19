@@ -37,9 +37,10 @@ jobs:
       # see: https://docs.github.com/en/actions/learn-github-actions/environment-variables
       - name: Print Github Environment Variables
         run: |
-          echo "RepositoryName:      ${{ github.event.repository.name }}"
-          echo "Ref:      ${{ github.ref }}"
-          echo "Ref:      ${{ ALIYUN_REGISTRY }}"
+          echo "RepositoryName:       ${{ github.event.repository.name }}"
+          echo "Ref:                  ${{ github.ref }}"
+          echo "REPOSITORY:           $GITHUB_REPOSITORY"
+          echo "REGISTRY:             $ALIYUN_REGISTRY"
       
       - name: Get Metadata (Tags、Labels)
         id: metadata
